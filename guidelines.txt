@@ -1,0 +1,5 @@
+INVESTMENT COMPLIANCE POLICY MANDATE
+1. SINGLE EQUITY RISK LIMIT: No single stock exposure may exceed 10% of the total portfolio value.
+2. TECHNOLOGY SECTOR CAP: Total allocation across all technology stocks must not exceed 25% of the total portfolio.
+3. CASH BUFFER REQUIREMENT: Every portfolio must maintain a minimum of 5% liquidity in cash or cash equivalents at all times.
+4. MAXIMUM LEVERAGE RATIO: Margin and leverage utilization is strictly capped at 1.2x. No naked short selling is permitted.

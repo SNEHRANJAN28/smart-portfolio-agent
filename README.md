@@ -56,6 +56,21 @@ The core engineering pattern decouples data extraction, rule retrieval, and cogn
 * By leveraging local embeddings and a local instance of Llama 3 via Ollama, this project complies with strict institutional data-handling policies, proving that automated financial validation can exist without public network dependencies.
 
 ---
+## 🛡️ Governance & Guardrail Architecture
+
+To ensure institutional safety, the system enforces strict runtime boundaries across three structural dimensions:
+
+1. **Input Validation Guardrails (Topic Filtering):**
+   * Before reaching the cognitive routing loop, user inputs are structurally sanitized. If a query contains injection vectors, malformed logic, or requests un-vetted asset classes (such as unregulated crypto or speculative micro-caps), the engine short-circuits execution. It flags a policy violation without invoking the vector DB or external market APIs, completely preventing prompt injection exploits.
+
+2. **Retrieval-Augmented Generation (RAG) Guardrails:**
+   * The system relies exclusively on context fetched from the local FAISS index (your institutional compliance rules). 
+   * The system prompt is engineered with strict constraint bounding instructions: *"Base your evaluation strictly on the retrieved context guidelines. If the guidelines do not contain rules pertaining to the ticker or allocation requested, default to an absolute REJECTION and do not extrapolate or guess."* This mitigates semantic drift and eliminates hallucinated guidelines.
+
+3. **Output Structuring Guardrails (Deterministic Evaluation):**
+   * The `evaluator` node does not output raw, open-ended conversational prose. It maps outputs directly into a typed schema (using Pydantic models/LangChain structured outputs). 
+   * This forces the model to strictly isolate parameters into fields like `verdict` (`APPROVED` or `REJECTED`), `breached_policy_id`, and `mathematical_delta`. This structure guarantees that your Streamlit frontend receives stable data points to build its UI report cards without parsing unpredictable text.
+-----
 
 ## 🚀 Local Installation & Setup
 
